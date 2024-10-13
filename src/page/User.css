@@ -1,0 +1,23 @@
+/* src/AdminLogs.css */
+    .user {
+    background-color: #f9f9f9; /* สีพื้นหลัง */
+    border: 1px solid #e0e0e0; /* ขอบ */
+    border-radius: 8px; /* มุมโค้ง */
+    width: 80%; /* ความกว้างของ container */
+    margin: 20px auto; /* จัดกลาง */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* เงา */
+  }
+  
+  .header {
+    background-image: url('https://images-ext-1.discordapp.net/external/jT_ZIHR_KZXvSy2PZ3cO4uW4uQfEcnNeGkn5R7mTO6g/https/i.pinimg.com/originals/44/69/21/44692129b79f7592aa9e12a922393c9a.jpg?format=webp&width=505&height=670');
+    height: 200px;
+  }
+  
+
+  .user-container {
+    fontFamily: 'Montserrat, sans-serif';
+    padding: 50px; /* ช่องว่างภายใน */
+    font-size: 50px; /* ขนาดตัวอักษร */
+    margin: 0; /* ยกเลิก margin */
+  }
+  

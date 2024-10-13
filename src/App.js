@@ -7,9 +7,9 @@ import UserPage from './page/User';
 function App() {
   return (
     <div>
-      <SignIn />
+      {/*<SignIn />*/}
       {/*<AdminPage />*/}
-      {/*<UserPage />*/}
+      <UserPage />
 
 
     </div>
