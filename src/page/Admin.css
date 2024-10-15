@@ -1,26 +1,30 @@
-/* src/AdminLogs.css */
+
 .admin-logs {
-    background-color: #f9f9f9; /* สีพื้นหลัง */
+
     border: 1px solid #e0e0e0; /* ขอบ */
     border-radius: 8px; /* มุมโค้ง */
-    width: 80%; /* ความกว้างของ container */
+    width: 90%; /* ความกว้างของ container */
     margin: 20px auto; /* จัดกลาง */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* เงา */
+
+ 
   }
   
   .header {
     background-image: url('https://images-ext-1.discordapp.net/external/jT_ZIHR_KZXvSy2PZ3cO4uW4uQfEcnNeGkn5R7mTO6g/https/i.pinimg.com/originals/44/69/21/44692129b79f7592aa9e12a922393c9a.jpg?format=webp&width=505&height=670');
-    padding: 20px; /* ช่องว่างภายใน */
+    padding: 0px; /* ช่องว่างภายใน */
     text-align: center; /* จัดกลาง */
+
   }
   
-  .header h1 {
-    color: white; /* สีตัวอักษร */
-    font-size: 24px; /* ขนาดตัวอักษร */
-    margin: 0; /* ยกเลิก margin */
+  .header h1{
+    color: rgb(255, 255, 255); /* สีตัวอักษร */
+    font-size: 50px; /* ขนาดตัวอักษร */
+    padding-top: 70px;
+    text-shadow: 2px 2px 4px rgb(102, 95, 90); /* เงาเบลอเพื่อเพิ่มความลึก */
   }
   
   .logs-container {
-    padding: 20px; /* ช่องว่างภายใน */
+    padding: 50px; /* ช่องว่างภายใน */
   }
   
