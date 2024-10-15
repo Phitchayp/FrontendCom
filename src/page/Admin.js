@@ -1,9 +1,11 @@
 import './Admin.css'; // นำเข้าไฟล์ CSS
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function AdminPage() {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   const callApi = async () => {
     try {
@@ -22,11 +24,22 @@ function AdminPage() {
     callApi();
   }, []);
 
+    // ฟังก์ชัน Logout
+    const handleLogout = () => {
+        // ลบ token หรือข้อมูลใน localStorage / sessionStorage
+        localStorage.removeItem('token'); // สมมติว่าคุณเก็บ token ไว้ใน localStorage
+        // นำทางกลับไปยังหน้า login
+        navigate('/SignIn'); // สมมติว่าคุณมีเส้นทางหน้า login ชื่อ '/login'
+      };
+
   return (
+    
     <div className='scale-0-8'>
+        <button onClick={handleLogout} className="logout-button">Logout</button>
       <div className="admin-logs" >
         <div className="header">
           <h1>Admin Logs</h1>
+        
         </div>
         <div className="logs-table-container">
           {data.length > 0 ? (
