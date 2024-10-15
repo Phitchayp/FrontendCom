@@ -7,9 +7,12 @@ function UpdatePassword() {
 
     //------------------sign up-----------------------
     const [usernameupdate, setUsernameupdate] = useState('');
+    const [oldpassword, setOldpassword] = useState('');
+
     const [passwordupdate, setPasswordupdate] = useState('');
     const [passwordupdate2, setPasswordupdate2] = useState('');
     const [showPasswordupdate, setShowPasswordupdate] = useState(false); // สถานะการแสดงรหัสผ่าน
+    const [showOldpassword, setShowOldpassword] = useState(false);
 
     const navigate = useNavigate(); // ใช้สำหรับเปลี่ยนหน้า
     const handleSignInClick = () => navigate('/signin'); // ไปหน้า Sign In
@@ -28,7 +31,13 @@ function UpdatePassword() {
         setPasswordupdate2(e.target.value);
     };
 
-    
+
+    //old password
+    const handleInputChangeOldpassword = (e) => {
+        setOldpassword(e.target.value);
+    };
+
+
 
     //----------------- sweet alert update ----------------
 
@@ -39,8 +48,8 @@ function UpdatePassword() {
 
 
     const handleSignupsweet = () => {
-        // ตรวจสอบรบ
-        if (!usernameupdate || !passwordupdate || !passwordupdate2) {
+        // ตรวจสอบครบ
+        if (!usernameupdate || !passwordupdate || !passwordupdate2 || !oldpassword) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -71,7 +80,7 @@ function UpdatePassword() {
 
 
         Swal.fire({
-            title: 'Signed up successfully!',
+            title: 'Password is updated',
             icon: 'success',
         });
     };
@@ -108,6 +117,53 @@ function UpdatePassword() {
                             outline: 'none'
                         }}
                     />
+
+                    {/* old password */}
+                    <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '17px', marginRight: '90%', marginTop: '20px' }}>Password:</h2>
+                    <div style={{ position: 'relative', width: '450px' }}>
+                        <input
+                            type={showOldpassword ? 'text' : 'password'} // เปลี่ยนเป็น type password ตามสถานะ
+                            placeholder="Enter your new password"
+                            value={oldpassword}
+                            onChange={handleInputChangeOldpassword}
+                            style={{
+                                padding: '14px',
+                                width: '100%', // ใช้ width 100% เพื่อให้พอดีกับ div
+                                fontSize: '17px',
+                                borderRadius: '12px',
+                                fontFamily: 'Montserrat, sans-serif',
+                                backgroundColor: '#adb9f4',
+                                border: 'none',
+                                outline: 'none'
+                            }}
+                        />
+
+
+                        <button
+                            onClick={() => setShowOldpassword(!showOldpassword)} // เปลี่ยนสถานะเมื่อคลิก
+                            style={{
+                                position: 'absolute',
+                                right: '0px', // ปรับตำแหน่งปุ่มให้ไปอยู่ขวา
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                background: '#adb9f4', // สีพื้นหลัง
+                                border: 'none',
+                                color: '#5e3a91',
+                                cursor: 'pointer',
+                                fontFamily: 'Montserrat, sans-serif',
+                                fontWeight: 700,
+                                fontSize: '15px', // ขนาดฟอนต์
+                                width: '50px', // ความกว้าง
+                                height: '40px', // ความสูง
+                                borderRadius: '8px', // มุมโค้ง
+                                display: 'flex', // ใช้ flexbox เพื่อจัดแนวข้อความ
+                                alignItems: 'center', // จัดแนวแนวตั้ง
+                                justifyContent: 'center' // จัดแนวนอน
+                            }}
+                        >
+                            {showPasswordupdate ? 'Hide' : 'Show'}
+                        </button>
+                    </div>
 
                     <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '17px', marginRight: '90%', marginTop: '20px' }}>Password:</h2>
                     <div style={{ position: 'relative', width: '450px' }}>
@@ -211,25 +267,24 @@ function UpdatePassword() {
                     </div>
                 </div>
                 <div style={{
-                    backgroundColor: 'rgba(255, 255, 255, 1)', // กรอบโปร่งแสงสำหรับเนื้อหาฟอร์ม
+                    backgroundColor: 'rgba(255, 255, 255, 1)',
                     padding: '35px',
                     borderRadius: '20px',
                     boxShadow: '0 0 15px rgba(0, 0, 0, 0.5)',
-                    position: 'relative', // เพิ่ม position relative
-                    marginTop: '50px', // เพิ่มระยะห่างจากกล่องข้างบน
-                    width: '480px',
-                    height: '25px', // ปรับความสูงให้เหมาะสม
-                    display: 'flex', // ใช้ flexbox
-                    alignItems: 'center', // จัดแนวกลางในแนวตั้ง
-                    justifyContent: 'center', // จัดแนวกลางในแนวนอน
-                    textAlign: 'center' // จัดการจัดแนวข้อความ
+                    position: 'relative',
+                    width: '100px', // ขยายขนาดให้กล่องเหมาะสม
+                    height: '0', // ให้ความสูงปรับตามเนื้อหา
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    margin: '0 auto', // ทำให้กล่องอยู่กลางในแนวนอน
+                    marginTop: '45px', // เพิ่มระยะห่างจากกล่องข้างบน
                 }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '17px', marginRight: '10px', color: '#a3181a' }}>
-                            Already had an account?
-                        </h3>
+
                         <h3
-                            style={{ cursor: 'pointer', fontWeight: 'bold', color: '#292724' }}
+                            style={{ cursor: 'pointer', fontWeight: '900', color: '#5e3a91', fontSize: '22px' }}
                             onClick={handleSignInClick} // เมื่อคลิกจะเปลี่ยนกลับไปหน้า Sign In
                         >
                             Sign in
