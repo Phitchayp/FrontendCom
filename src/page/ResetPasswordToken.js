@@ -138,7 +138,7 @@ function ResetPasswordToken() {
                                 fontSize: '17px',
                                 borderRadius: '12px',
                                 fontFamily: 'Montserrat, sans-serif',
-                                backgroundColor: '#F4EEAD',
+                                backgroundColor: '#d1ed9a',
                                 border: 'none',
                                 outline: 'none',
                             }}
@@ -150,7 +150,7 @@ function ResetPasswordToken() {
                                 right: '0px', // ปรับตำแหน่งปุ่มให้ไปอยู่ขวา
                                 top: '50%',
                                 transform: 'translateY(-50%)',
-                                background: '#F4EEAD', // สีพื้นหลัง
+                                background: '#d1ed9a', // สีพื้นหลัง
                                 border: 'none',
                                 color: '#b8811d',
                                 cursor: 'pointer',
@@ -184,7 +184,7 @@ function ResetPasswordToken() {
                             fontSize: '17px',
                             borderRadius: '12px',
                             fontFamily: 'Montserrat, sans-serif',
-                            backgroundColor: '#F4EEAD',
+                            backgroundColor: '#d1ed9a',
                             border: 'none',
                             outline: 'none',
                         }}
@@ -199,7 +199,7 @@ function ResetPasswordToken() {
                                 fontSize: '20px',
                                 borderRadius: '12px',
                                 width: '350px',
-                                background: '#E8B774',
+                                background: '#ed9abe',
                                 color: '#292724',
                                 marginTop: '-30px',
                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
