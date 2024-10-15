@@ -123,7 +123,7 @@ function UpdatePassword() {
                     <div style={{ position: 'relative', width: '450px' }}>
                         <input
                             type={showOldpassword ? 'text' : 'password'} // เปลี่ยนเป็น type password ตามสถานะ
-                            placeholder="Enter your new password"
+                            placeholder="Enter your password"
                             value={oldpassword}
                             onChange={handleInputChangeOldpassword}
                             style={{
@@ -165,7 +165,7 @@ function UpdatePassword() {
                         </button>
                     </div>
 
-                    <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '17px', marginRight: '90%', marginTop: '20px' }}>Password:</h2>
+                    <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '17px', marginRight: '73%', marginTop: '20px' }}>New Password:</h2>
                     <div style={{ position: 'relative', width: '450px' }}>
                         <input
                             type={showPasswordupdate ? 'text' : 'password'} // เปลี่ยนเป็น type password ตามสถานะ
@@ -213,11 +213,11 @@ function UpdatePassword() {
 
                     {/* confirm password */}
 
-                    <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '17px', marginRight: '67%', marginTop: '20px' }}>Confirm Password:</h2>
+                    <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '17px', marginRight: '59%', marginTop: '20px' }}>Confirm New Password:</h2>
                     <div style={{ position: 'relative', width: '450px' }}>
                         <input
                             type="password" // เปลี่ยนจาก type="text" เป็น type="password"
-                            placeholder="Confirm your password"
+                            placeholder="Confirm your new password"
                             value={passwordupdate2}
                             onChange={handleInputpasswordupdateconfirmpass}
                             style={{
