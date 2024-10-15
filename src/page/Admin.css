@@ -71,3 +71,19 @@
   overflow: hidden; /* เพื่อหลีกเลี่ยงการเกิด overflow */
 }
 
+
+.logout-button {
+  background-color: #f961bf;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-left: 90%;
+}
+
+.logout-button:hover {
+  background-color: #ff1f3a;
+}

@@ -1,4 +1,5 @@
 import './User.css';
+import { useNavigate } from 'react-router-dom';
 
 const products = [
   {
@@ -29,7 +30,17 @@ const products = [
 ];
 
 function UserPage() { 
+    const navigate = useNavigate();
+        // ฟังก์ชัน Logout
+        const handleLogout = () => {
+            // ลบ token หรือข้อมูลใน localStorage / sessionStorage
+            localStorage.removeItem('token'); // สมมติว่าคุณเก็บ token ไว้ใน localStorage
+            // นำทางกลับไปยังหน้า login
+            navigate('/SignIn'); // สมมติว่าคุณมีเส้นทางหน้า login ชื่อ '/login'
+          };
   return (
+    <div>
+     <button onClick={handleLogout} className="logout-button">Logout</button>
     <div className="user">
       <div className="header">
       </div>
@@ -45,6 +56,7 @@ function UserPage() {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 }
