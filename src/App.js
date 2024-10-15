@@ -6,6 +6,7 @@ import ResetPassword from './page/ResetPassword';
 import ResetPasswordToken from './page/ResetPasswordToken';
 import UserPage from './page/User';
 import AdminPage from './page/Admin';
+import UpdatePassword from './page/UpdatePassword';
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
 
         <Route path="/user" element={<UserPage />} />
         <Route path="/Admin" element={<AdminPage />} />
+
+        <Route path="/update-password" element={<UpdatePassword />} />
+
+
 
   
         <Route path="/" element={<SignIn />} /> {/* Default to SignIn */}
