@@ -1,5 +1,10 @@
-import React, { useState , useEffect} from 'react';
-import './page.css';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom/client'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+
+
 <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
     rel="stylesheet"
@@ -20,9 +25,9 @@ function SignIn() {
         setPasswordsignin(e.target.value);
     };
 
-    const handleSignIn = () => {
-        alert(`สวัสดีจร้า Sign in เรียบร้อย, ${usernamesignin}`);
-    };
+    // const handleSignIn = () => {
+    //     alert(`สวัสดีจร้า Sign in เรียบร้อย, ${usernamesignin}`);
+    // };
 
     //------------------sign up-----------------------
     const [usernamesignup, setUsernamesignup] = useState('');
@@ -43,25 +48,11 @@ function SignIn() {
         setPasswordsignup2(e.target.value);
     };
 
-    const handleSignup = () => {
-        alert(`สวัสดีจร้า Sing up เรียบร้อย, ${usernamesignup}`);
-    };
+    // const handleSignup = () => {
+    //     alert(`สวัสดีจร้า Sing up เรียบร้อย, ${usernamesignup}`);
+    // };
 
     //----------------- handle click -----------------------
-    // const [isSignIn, setIsSignIn] = useState(true); // เริ่มต้นที่หน้า Sign In
-
-    // const handleSignUpClick = () => {
-    //     setIsSignIn(false); // เปลี่ยนเป็นหน้า Sign Up
-    // };
-
-    // const handleSignInClick = () => {
-    //     setIsSignIn(true); // เปลี่ยนกลับมาหน้า Sign In
-    // };
-
-
-    // const [isPasswordReset, setIsPasswordReset] = useState(false); //เริ่มต้นที่หน้า sign in
-
-
     //ลอง
     const [currentPage, setCurrentPage] = useState('signin');
 
@@ -90,11 +81,94 @@ function SignIn() {
         setpasswordReset(e.target.value);
     };
 
-    const handlepasswordReset = () => {
-        alert(`กรุณาไปยืนยันที่อีเมล, ${passwordReset}`);
+    //---------------- sweet alert Sign in ---------------
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const handleSigninsweet = () => {
+        if (!usernamesignin || !passwordsignin) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill out all the fields!',
+            });
+            return;
+        }
+
+        
+        if (!validateEmail(usernamesignin)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Invalid email format!',
+            });
+            return;
+        }
+
+      
+        Swal.fire({
+            title: 'Signed in successfully!',
+            icon: 'success',
+        });
     };
 
 
+    //----------------- sweet alert Sign up ----------------
+    const handleSignupsweet = () => {
+        // ตรวจสอบรบ
+        if (!usernamesignup || !passwordsignup || !passwordsignup2) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill out all the fields!',
+            });
+            return;
+        }
+
+    
+        if (!validateEmail(usernamesignup)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Invalid email format!',
+            });
+            return;
+        }
+
+        // ตรวจสอบว่ารหัสผ่านตรงกันมั้ย
+        if (passwordsignup !== passwordsignup2) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Passwords do not match!',
+            });
+            return;
+        }
+
+       
+        Swal.fire({
+            title: 'Signed up successfully!',
+            icon: 'success',
+        });
+    };
+
+    //------------------ sweet alert password reset --------------
+
+    const handlepasswordResetsweet = () => {
+ 
+        if (!validateEmail(usernamesignup)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Invalid email format!',
+            });
+            return;
+        }
+        
+    
+    };
 
 
     return (
@@ -150,7 +224,7 @@ function SignIn() {
                             Email:
                         </h2>
                         <input
-                            type="text"
+                            type="email"
                             placeholder="Enter your email"
                             value={usernamesignin}
                             onChange={handleInputChange}
@@ -239,7 +313,7 @@ function SignIn() {
 
                         <div style={{ marginTop: '35px' }}>
                             <button
-                                onClick={handleSignIn}
+                                onClick={handleSigninsweet}
                                 style={{
                                     fontFamily: 'Montserrat, sans-serif',
                                     fontWeight: 900,
@@ -253,6 +327,9 @@ function SignIn() {
                                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // เพิ่มเงา
                                     transition: 'all 0.3s ease', // เพิ่มการเปลี่ยนแปลง
                                     height: '50px',
+                                    border: 'none',
+                                    outline: 'none'
+
                                 }}
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.boxShadow =
@@ -321,7 +398,7 @@ function SignIn() {
                         <h1 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 900, fontSize: '28px', marginTop: '0px', color: '#292724' }}>Sign Up</h1>
                         <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '17px', marginRight: '90%' }}>Email:</h2>
                         <input
-                            type="text"
+                            type="email"
                             placeholder="Enter your email"
                             value={usernamesignup}
                             onChange={handleInputChangesignup}
@@ -408,7 +485,7 @@ function SignIn() {
 
                         <div style={{ marginTop: '35px' }}>
                             <button
-                                onClick={handleSignup}
+                                onClick={handleSignupsweet}
                                 style={{
                                     fontFamily: 'Montserrat, sans-serif',
                                     fontWeight: 900,
@@ -421,7 +498,9 @@ function SignIn() {
                                     marginTop: '-30px',
                                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // เพิ่มเงา
                                     transition: 'all 0.3s ease', // เพิ่มการเปลี่ยนแปลง
-                                    height: '50px'
+                                    height: '50px',
+                                    border: 'none',
+                                    outline: 'none'
                                 }}
                                 onMouseOver={e => {
                                     e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.3)'; // เพิ่มเงาเมื่อเมาส์อยู่เหนือ
@@ -506,7 +585,7 @@ function SignIn() {
                             Email:
                         </h2>
                         <input
-                            type="text"
+                            type="email"
                             placeholder="Enter your email to reset password"
                             value={passwordReset}
                             onChange={handleInputpasswordReset}
@@ -525,7 +604,7 @@ function SignIn() {
 
                         <div style={{ marginTop: '35px' }}>
                             <button
-                                onClick={handlepasswordReset}
+                                onClick={handlepasswordResetsweet}
                                 style={{
                                     fontFamily: 'Montserrat, sans-serif',
                                     fontWeight: 900,
@@ -539,6 +618,8 @@ function SignIn() {
                                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // เพิ่มเงา
                                     transition: 'all 0.3s ease', // เพิ่มการเปลี่ยนแปลง
                                     height: '50px',
+                                    border: 'none',
+                                    outline: 'none'
                                 }}
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.boxShadow =
