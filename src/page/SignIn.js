@@ -54,6 +54,7 @@ function SignIn() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // นำทางไปที่ User.js
+
                     navigate('/user'); // เปลี่ยนเส้นทางที่นี่
                 }
             });
@@ -65,14 +66,28 @@ function SignIn() {
             if (e.response) {
                 // ตรวจสอบสถานะและแสดงข้อความที่เหมาะสม
                 switch (e.response.status) {
-                    case 403:
                     case 400:
+                    case 403:
+                        if(e.response.data.message === 'You need to change your password. It has been more than 90 days since the last change.'){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: e.response.data.message || 'Error occurred.',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // นำทางไปที่ User.js
+                                    navigate('/update-password'); // เปลี่ยนเส้นทางที่นี่
+                                }
+                            });
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: e.response.data.message || 'Error occurred.',
+                            });
+                        }
                         //console.log(e.response.data); // ดู JSON ที่ส่งกลับจากเซิร์ฟเวอร์
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: e.response.data.message || 'Error occurred.',
-                        });
+                        
                         break;
                     default:
                         Swal.fire({
