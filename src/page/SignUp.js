@@ -46,6 +46,17 @@ function SignUp() {
                 email: usernamesignup,
                 password: passwordsignup
             })
+            
+            // เก็บ token ใน localStorage
+            const userData = {
+                id: res.data.user.id,
+                token: res.data.token,
+                email: res.data.user.email,
+                role: res.data.user.role
+            }
+        
+            // แปลงเป็น JSON string ก่อนเก็บ
+            localStorage.setItem('user', JSON.stringify(userData));
 
             Swal.fire({
                 title: 'Signed up successfully!',
