@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
 import BaseLayout from './BaseLayout';
+import axios from 'axios'
 
 function SignUp() {
 
@@ -39,6 +40,54 @@ function SignUp() {
         return re.test(String(email).toLowerCase());
     };
 
+    const callsignup = async()=>{
+        try{
+            const res = await axios.post("http://localhost:3001/api/signup",{
+                email: usernamesignup,
+                password: passwordsignup
+            })
+
+            Swal.fire({
+                title: 'Signed up successfully!',
+                icon: 'success',
+                confirmButtonText: 'OK', // กำหนดปุ่ม OK
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // นำทางไปที่ User.js
+                    navigate('/user'); // เปลี่ยนเส้นทางที่นี่
+                }
+            });
+
+        } catch(e){
+            if (e.response) {
+                // ตรวจสอบสถานะและแสดงข้อความที่เหมาะสม
+                switch (e.response.status) {
+                    case 400:
+                        console.log(e.response.data); // ดู JSON ที่ส่งกลับจากเซิร์ฟเวอร์
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: e.response.data.message || 'Error occurred.',
+                        });
+                        break;
+                    default:
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'An unexpected error occurred. Please try again later.',
+                        });
+                }
+            } else {
+                // กรณีไม่มีการตอบสนองจากเซิร์ฟเวอร์
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Network Error',
+                    text: 'Could not connect to the server. Please check your internet connection.',
+                });
+            }
+        }
+    }
+
 
     const handleSignupsweet = () => {
         // ตรวจสอบรบ
@@ -70,12 +119,8 @@ function SignUp() {
             });
             return;
         }
-
-
-        Swal.fire({
-            title: 'Signed up successfully!',
-            icon: 'success',
-        });
+        
+        callsignup();
     };
 
     return (

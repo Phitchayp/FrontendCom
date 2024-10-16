@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
 import BaseLayout from './BaseLayout';
+import axios from 'axios'
 
 function UpdatePassword() {
 
@@ -37,6 +38,56 @@ function UpdatePassword() {
         setOldpassword(e.target.value);
     };
 
+    const callChangePassword = async()=>{
+        try{
+            const res = await axios.post("http://localhost:3001/api/change-password",{
+                email: usernameupdate,
+                currentPassword: oldpassword,
+                newPassword: passwordupdate
+            })
+
+            Swal.fire({
+                title: 'Password is updated',
+                icon: 'success',
+                confirmButtonText: 'OK', // กำหนดปุ่ม OK
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // นำทางไปที่ User.js
+                    navigate('/signin'); // เปลี่ยนเส้นทางที่นี่
+                }
+            });
+
+        } catch(e){
+            if (e.response) {
+                // ตรวจสอบสถานะและแสดงข้อความที่เหมาะสม
+                switch (e.response.status) {
+                    case 403:
+                    case 400:
+                        console.log(e.response.data); // ดู JSON ที่ส่งกลับจากเซิร์ฟเวอร์
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: e.response.data.message || 'Error occurred.',
+                        });
+                        break;
+                    default:
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'An unexpected error occurred. Please try again later.',
+                        });
+                }
+            } else {
+                // กรณีไม่มีการตอบสนองจากเซิร์ฟเวอร์
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Network Error',
+                    text: 'Could not connect to the server. Please check your internet connection.',
+                });
+            }
+        }
+    }
+
 
 
     //----------------- sweet alert update ----------------
@@ -47,7 +98,7 @@ function UpdatePassword() {
     };
 
 
-    const handleSignupsweet = () => {
+    const handleUpdatePasswordsweet = () => {
         // ตรวจสอบครบ
         if (!usernameupdate || !passwordupdate || !passwordupdate2 || !oldpassword) {
             Swal.fire({
@@ -78,11 +129,7 @@ function UpdatePassword() {
             return;
         }
 
-
-        Swal.fire({
-            title: 'Password is updated',
-            icon: 'success',
-        });
+        callChangePassword();
     };
 
     return (
@@ -236,7 +283,7 @@ function UpdatePassword() {
 
                     <div style={{ marginTop: '35px' }}>
                         <button
-                            onClick={handleSignupsweet}
+                            onClick={handleUpdatePasswordsweet}
                             style={{
                                 fontFamily: 'Montserrat, sans-serif',
                                 fontWeight: 900,
