@@ -34,6 +34,17 @@ function SignIn() {
                 email: usernamesignin,
                 password: passwordsignin
             });
+
+            // เก็บ token ใน localStorage
+            const userData = {
+                id: res.data.user.id,
+                token: res.data.token,
+                email: res.data.user.email,
+                role: res.data.user.role
+            }
+        
+            // แปลงเป็น JSON string ก่อนเก็บ
+            localStorage.setItem('user', JSON.stringify(userData));
     
             // จัดการข้อมูลเมื่อเข้าสู่ระบบสำเร็จ
             Swal.fire({
@@ -56,7 +67,7 @@ function SignIn() {
                 switch (e.response.status) {
                     case 403:
                     case 400:
-                        console.log(e.response.data); // ดู JSON ที่ส่งกลับจากเซิร์ฟเวอร์
+                        //console.log(e.response.data); // ดู JSON ที่ส่งกลับจากเซิร์ฟเวอร์
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
